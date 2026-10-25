@@ -18,6 +18,48 @@ See [LICENSE](LICENSE), [LICENSES.md](LICENSES.md), and
 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for scope, included notices, and
 the separate SDK and service restrictions before redistribution.
 
+## What's new in this edition
+
+This edition adds **Sign in with ChatGPT** as an optional model provider alongside
+Inkwell's existing Ollama, OpenAI-compatible API-key and Anthropic integrations.
+The original writing workflow remains in place: planning, story bible, chapter
+context, revisions, and exports all continue to use Inkwell's shared pipeline.
+
+- **Sign in instead of supplying an API key:** connect an eligible ChatGPT account
+  through the official Sign in with ChatGPT DevKit's OAuth/PKCE flow. This is a
+  separate provider from the metered OpenAI API-key integration; signing in does
+  not silently switch to API-key billing.
+- **Explicit account selection:** manage saved ChatGPT accounts and choose which
+  one supplies models and handles requests. Existing accounts can be selected or
+  reconnected without the new-account licensing dialog.
+- **Account-specific model choices:** available ChatGPT models and usage limits
+  are determined by the selected account and service, not by a fixed list
+  advertised by this repository.
+- **Writing-context integration:** ChatGPT requests use the existing chapter,
+  synopsis, running-summary and story-bible context assembly, rather than a
+  standalone chat window disconnected from your book.
+- **Optional automatic summaries:** an independent, off-by-default setting lets
+  Inkwell update the running summary when you leave an edited chapter. These
+  requests consume the chosen account's allowance. Manual summaries still work.
+- **Safer local credential handling:** ChatGPT tokens are held in Windows
+  CurrentUser DPAPI-protected storage, not returned to the browser as raw
+  credentials. Sign-out removes local credentials and attempts remote revocation.
+- **Consent before adding an account:** each Add account attempt displays the
+  licensing acknowledgment with an initially unchecked checkbox. Cancelling
+  starts no sign-in. The acknowledgment is session-memory-only; it is not
+  transmitted to OpenAI.
+- **Source and test transparency:** the official DevKit is vendored without source
+  or configuration changes; separate local build scripts verify its provenance.
+  Regression and browser harnesses exercise the integration with synthetic
+  fixtures without accessing a saved real account.
+
+**Important:** This is an experimental, unofficial integration, not an OpenAI
+product. It does not grant ChatGPT plan eligibility, permission to use a plan in
+this application, commercial-use rights to the DevKit, or any special entitlement.
+It is also **not** a way to turn ChatGPT subscription usage into OpenAI API credit.
+See [LICENSES.md](LICENSES.md), [SECURITY.md](SECURITY.md), and
+[RELEASE.md](RELEASE.md) before enabling or redistributing it.
+
 ## Start on Windows
 
 Install **Node.js 22.12 or newer**, extract or clone this repository, and
@@ -42,9 +84,9 @@ story context to their configured service. Exports **KDP-ready EPUB** for Kindle
 
 Built by **[Joshua Opel](https://github.com/joshuaopel)** at **Bowler Hat Studio**, and
 given away. Inkwell-authored code is MIT licensed; the optional bundled subscription
-SDK has a separate noncommercial license (see LICENSES.md). No paid tier, no "open core" with the good parts
-behind a wall — because the tools sold to novelists are rented, metered, and pointed at
-someone else's server, and they shouldn't be.
+SDK has a separate noncommercial license (see LICENSES.md). The upstream
+application does not require a paid Inkwell tier. Optional cloud services can
+have their own charges, limits, account rules and licensing terms.
 
 Built as a smarter, personal alternative to Sudowrite. The difference is the
 **scaffolding around the model**:
@@ -62,9 +104,9 @@ Built as a smarter, personal alternative to Sudowrite. The difference is the
   snapshot** (characters, locations, themes, timeline) and a story-bible peek.
 - **Anti-amnesia context engine** — every generation is assembled from three layers:
   the whole-book synopsis + running summary, the current chapter's beats, and the
-  immediate paragraphs. It never loses the thread.
+  immediate paragraphs. This reduces context loss but cannot guarantee continuity.
 - **Story Bible** — characters, locations, themes, style. The single source of truth
-  the AI is checked against so the story stays consistent.
+  used as reference context to help the AI stay consistent.
 - **Notes → revise → iterate** — select any passage, write real editorial notes on it
   ("cut the exposition, make her anger cold not loud, end on the door closing"), and get
   it rewritten. Not happy? Hit **More notes ↻** and give feedback on the revision itself —
@@ -129,7 +171,8 @@ Built as a smarter, personal alternative to Sudowrite. The difference is the
   in — the Art panel has taken your own files since day one.
 - **Works from your phone** — icon rail becomes a tab bar, panels become drawers, the
   outline map takes touch. Run it on your desktop and open it from anywhere on your
-  network (see *Reading & writing from your phone* below).
+  network **in the original upstream app only**. This edition disables unauthenticated
+  LAN hosting and accepts loopback browser connections only (see [SECURITY.md](SECURITY.md)).
 - **Everything is a file** — each book is a folder of Markdown + JSON on disk.
   Portable, backup-able, git-able.
 
@@ -218,7 +261,7 @@ chapter plan and local prose actually reach the model. It also tests the return 
 including one bounded repair when a model asks another question in the same dimension
 while major dimensions remain open.
 
-The deterministic suite proves wiring and contracts. Real-model scenario checks are a
+The deterministic suite tests wiring and contracts. Real-model scenario checks are a
 separate quality layer: they ask whether the questions are insightful and the prose is
 effective after the correct assignment has been delivered.
 
@@ -349,6 +392,21 @@ Environment variables (all optional):
 - `OLLAMA_HOST` — Ollama URL (default `http://localhost:11434`)
 - `INKWELL_BOOKS` — where books are stored (default `./books`)
 
+## Repository layout and upstream relationship
+
+This edition is an **independent repository based on** the original Inkwell,
+not an official upstream release. The upstream project's authorship and MIT
+notice are retained, while the independent modifications and the bundled SDK
+are documented separately. Its repository need not be a GitHub-recognized fork
+in order to attribute upstream or pull upstream changes through a Git remote.
+
+The SDK's noncommercial license applies to the SDK, not automatically to every
+line of Inkwell code or to ownership of manuscripts created with the app. The
+in-app commercial-works acknowledgment is an extra user pledge, **not** an
+assertion that OpenAI's SDK license by itself dictates the license or ownership
+of generated writing. Review the actual license texts and terms for the
+applicable restrictions; the README is not a substitute for them.
+
 ## Build and verification
 
 Run `npm ci`, `npm run build`, `npm test`, then `npm start`. Tests use synthetic
@@ -358,8 +416,10 @@ Existing SVG assets cannot be served on the application origin.
 
 ## ChatGPT subscription (Windows)
 
-Settings → ChatGPT (Subscription) → read the privacy notice, acknowledge it, then
-Continue with ChatGPT. An eligible plan and OpenAI permission for plan use are
+Open **Settings → ChatGPT (Subscription)**, review the privacy notice, and use
+**Add account / Continue with ChatGPT**. Each new-account attempt requires you to
+review the licensing notice and actively check the agreement before authentication.
+If you cancel or press Escape, authentication does not begin. An eligible plan and OpenAI permission for plan use are
 required. The normal API-key provider remains separate. Model choices come from
 the selected account; no hidden billing fallback is used.
 
@@ -374,6 +434,29 @@ consume subscription allowance when leaving an edited chapter; disable the opt-i
 to stop these requests. Manual summaries remain available. Unsupported sampling
 and output-token controls stay saved for other providers. Manage usage opens
 ChatGPT settings; sign out clears local tokens and attempts remote revocation.
+
+### ChatGPT setup and behaviour at a glance
+
+1. Install or launch the app using the Windows instructions above.
+2. In **Settings → ChatGPT (Subscription)**, review the privacy information and
+   licensing acknowledgment, then choose **Add account**.
+3. Leave the checkbox unchecked if you do not agree; **Cancel** or **Escape** stops
+   the flow. To proceed, check the box and select **Agree & Continue**.
+4. Complete sign-in and select the account and an available model. Your book's
+   selected context is sent to OpenAI for generation when this provider is used.
+5. To disable automatic summary requests, leave the **automatic summaries**
+   opt-in off. You can still trigger summaries manually.
+
+No ChatGPT sign-in is needed to use local Ollama or separately configured
+API-key providers. On non-Windows systems, this provider is unavailable rather
+than falling back to storing unencrypted ChatGPT tokens. If an account, model or
+request is rejected by the service, check the account's eligibility and limits;
+this project cannot override them. Rate limiting does not trigger automatic
+account switching or an uncontrolled retry loop.
+
+The local server is **loopback-only** by design. The official upstream guide's
+instructions for opening Inkwell from a phone on your LAN do not apply to this
+edition. Do not expose the local app to the internet as a workaround.
 
 Read public/privacy.html and LICENSES.md before distributing this edition.
 The bundled SDK is NOT MIT: commercial use needs a separate OpenAI agreement.
@@ -402,7 +485,7 @@ or licensing of generated works. Inkwell does not inspect manuscripts for commer
 
 For the reviewed source release, run `npm run release:source`; see [RELEASE.md](RELEASE.md).
 
-Browser regression tests (development only): npm run test:browser.
+Browser regression tests (development only): `npm run test:browser`.
 Windows uses installed Microsoft Edge in headless mode. On other platforms,
 install Playwright Chromium with npx playwright install chromium first.
 The fixture uses a temporary books directory, blocks external transport and
