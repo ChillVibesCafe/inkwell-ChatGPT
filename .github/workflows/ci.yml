@@ -1,0 +1,36 @@
+name: Verify source release
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: windows-latest
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        node: [22, 24]
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version: ${{ matrix.node }}
+          package-manager-cache: false
+      - run: npm ci
+      - run: npm run verify:sdk
+      - run: npm test
+      - name: Install browser for UI checks
+        if: matrix.node == 24
+        run: npx playwright install msedge
+      - name: Verify UI
+        if: matrix.node == 24
+        run: npm run test:browser
+      - run: npm run release:source

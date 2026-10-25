@@ -1,0 +1,78 @@
+{
+  "repository": "https://github.com/openai/sign-in-with-chatgpt-devkit",
+  "commit": "0a36fefeb913055c8c7a1a29b63d82b96b2e841a",
+  "files": {
+    "vendor/siwc-local/LICENSE": {
+      "upstream": "packages/local/LICENSE",
+      "sha256": "d12fe9f3c01626a133398d70e672b5591c38b1819f3da852b1e3ef8da606facd"
+    },
+    "vendor/siwc-local/package.json": {
+      "upstream": "packages/local/package.json",
+      "sha256": "40fe0d9ae5c51b19897d87783b9735aaf9af80677d7d840f78fff890b1b759f2"
+    },
+    "vendor/siwc-local/src/errors.ts": {
+      "upstream": "packages/local/src/errors.ts",
+      "sha256": "14a1f7b8c6913feb788059309b527c6ef9f25ffba8470aeb216a1559c6b678d3"
+    },
+    "vendor/siwc-local/src/index.ts": {
+      "upstream": "packages/local/src/index.ts",
+      "sha256": "ea94e148be97f91d627be98dd4535cc2a38cee4f2bfd5d94d918b2c87f351870"
+    },
+    "vendor/siwc-local/src/models.ts": {
+      "upstream": "packages/local/src/models.ts",
+      "sha256": "a1e33e85073aa2f79095ecb572c6123b329d60aa7f68cff3591c53f838ef2bd1"
+    },
+    "vendor/siwc-local/src/oauth.ts": {
+      "upstream": "packages/local/src/oauth.ts",
+      "sha256": "556e7afc432db0d59b14912a20fdbaa4a76220c8e7d3e404efc5430e4e1a5ba1"
+    },
+    "vendor/siwc-local/src/responses.ts": {
+      "upstream": "packages/local/src/responses.ts",
+      "sha256": "66225e439c44b20d77295c800abbc0cbadcf56293cb42bc0733d226e307d3598"
+    },
+    "vendor/siwc-local/src/storage.ts": {
+      "upstream": "packages/local/src/storage.ts",
+      "sha256": "51c61d3fe369441951a08642089264cbdac96d9906ebf2f59eeda131153b30a4"
+    },
+    "vendor/siwc-local/src/types.ts": {
+      "upstream": "packages/local/src/types.ts",
+      "sha256": "01f5863b62ed9d6c3b3765123cba1f0c8b73ca395520fc9ba116a16b13980fc1"
+    },
+    "vendor/siwc-local/test/authorization.test.mjs": {
+      "upstream": "packages/local/test/authorization.test.mjs",
+      "sha256": "ca7c32ca026ec849001341ca7e832fec0aa933887c53440add34b5543b2ac81a"
+    },
+    "vendor/siwc-local/test/errors.test.mjs": {
+      "upstream": "packages/local/test/errors.test.mjs",
+      "sha256": "9a46973120ba271bad74beeeca445597627bcd08959c73abe85375c037b4c45f"
+    },
+    "vendor/siwc-local/test/refresh.test.mjs": {
+      "upstream": "packages/local/test/refresh.test.mjs",
+      "sha256": "5dac6767ef1ede7ecab5a87852ea542236df87dcef93bcb8a3b1922dce48bac7"
+    },
+    "vendor/siwc-local/test/responses.test.mjs": {
+      "upstream": "packages/local/test/responses.test.mjs",
+      "sha256": "c6a1d05a9b88ea58801440d396da07d4e9351f27fe0ad0625c64816e5042f714"
+    },
+    "vendor/siwc-local/test/storage.test.mjs": {
+      "upstream": "packages/local/test/storage.test.mjs",
+      "sha256": "4662475d3472a4000a2a69df5246a2db0e14e7596331efa640f52539d00ab62c"
+    },
+    "vendor/siwc-local/tsconfig.json": {
+      "upstream": "packages/local/tsconfig.json",
+      "sha256": "bc8a11a7f1b5f56a1d198f37bd53422f1622392ce6b13be110ccb256590739be"
+    },
+    "vendor/siwc-local/THIRD_PARTY_NOTICES.md": {
+      "upstream": "THIRD_PARTY_NOTICES.md",
+      "sha256": "43697acc19b6a64ed852a038b1e27b3877c14a7d9a039ef80dc2b0df2f602714"
+    },
+    "vendor/siwc-dependency-inventory.json": {
+      "upstream": "docs/dependency-inventory.json",
+      "sha256": "278e951c2b211c1400d26e7766cd157eef5d6bf2307107ca1920f0e8868b2227"
+    },
+    "build/siwc/tsconfig.base.json": {
+      "upstream": "tsconfig.base.json",
+      "sha256": "0a5ea6e7b6b5342e17ef12567649e73629e12c6847f92366970e71f81e29512b"
+    }
+  }
+}

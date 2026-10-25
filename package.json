@@ -1,0 +1,42 @@
+{
+  "name": "inkwell",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Experimental ChatGPT subscription integration for Inkwell, with local Ollama and API-key providers, story memory and EPUB export.",
+  "author": "Joshua Opel (Bowler Hat Studio)",
+  "license": "SEE LICENSE IN LICENSES.md",
+  "contributors": ["ChillVibesCafe (ChatGPT integration and independent modifications)"],
+  "keywords": [
+    "writing",
+    "novel",
+    "ollama",
+    "local-llm",
+    "epub",
+    "authoring"
+  ],
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "build": "node scripts/build-siwc.mjs && node --check server.js && node --check public/app.js",
+    "verify:sdk": "node scripts/verify-siwc.mjs",
+    "release:source": "node scripts/package-release.mjs",
+    "prepare": "npm run build",
+    "test": "node --test test/*.test.js vendor/siwc-local/test/*.test.mjs",
+    "test:browser": "playwright test"
+  },
+  "dependencies": {
+    "@siwc/local": "file:vendor/siwc-local",
+    "express": "^4.22.3",
+    "jszip": "^3.10.1"
+  },
+  "engines": {
+    "node": ">=22.12"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.64.1",
+    "@types/node": "^26.6.5",
+    "@types/proper-lockfile": "^4.1.4",
+    "typescript": "^7.0.2"
+  }
+}

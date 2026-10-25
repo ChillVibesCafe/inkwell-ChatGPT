@@ -1,0 +1,24 @@
+PR candidate based on verified upstream main 09c297e121370c3f27ea7352cbc50919faa86655.
+
+Experimental ChatGPT integration patch by ChillVibesCafe.
+Original Inkwell by Joshua Opel (Bowler Hat Studio). Original application code
+and independently authored modifications remain MIT licensed. The bundled SDK
+is unmodified and retains the separate DevKit Noncommercial License. Inkwell's
+build configuration and scripts are outside the SDK; npm run verify:sdk checks
+official source hashes. See vendor/siwc-PROVENANCE.md, THIRD_PARTY_NOTICES.md and
+LICENSES.md for scope and remaining distribution/service obligations.
+
+Use npm ci, npm run build, npm test, npm start; on Windows you may use
+start-inkwell.bat in this directory. The launcher defaults to port4323;
+npm start defaults to port4321 (PORT can be set explicitly).
+
+Books default to this app's books folder. No shared manuscripts junction is
+created by this contribution. Existing user-provided storage paths are retained
+and not inspected or modified by preparation. Do not run two instances against
+the same books simultaneously. Settings and credential files are never PR content.
+
+Read README.md, SECURITY.md, LICENSES.md and public/privacy.html before distribution.
+Commercial SDK use requires separate written OpenAI permission. Upstream acceptance
+is a maintainer decision, separate from this independent edition's noncommercial distribution.
+Missing approval alone is not evidence of a violation. Live account testing has
+not been performed in the synthetic release checks. See RELEASE.md.

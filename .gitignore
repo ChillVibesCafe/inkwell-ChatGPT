@@ -1,0 +1,42 @@
+# dependencies
+node_modules/
+
+# your work — manuscripts stay on your machine, never in git
+books/
+
+# personal, machine-specific runtime config (the app regenerates it)
+settings.json
+
+# the drawing engine and its model — gigabytes of downloaded binaries, and
+# Inkwell fetches them again on demand
+engine/
+
+# local working files (audio, scratch images) — not part of the app
+Video/
+promo/Capture.PNG
+
+# os / logs
+.DS_Store
+*.log
+
+.chatgpt/
+vendor/siwc-local/dist/
+
+
+test-results/
+playwright-report/
+release/
+
+# Local exports and inherited promotional material are not application source.
+/output/
+/case-study/
+/promo/
+# Local environment overrides and editor/OS scratch files.
+.env
+.env.*
+!.env.example
+Thumbs.db
+*.tmp
+*.bak
+.vscode/
+.idea/

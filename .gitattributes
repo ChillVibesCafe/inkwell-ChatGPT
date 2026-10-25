@@ -1,0 +1,12 @@
+# Store ordinary source as LF; keep Windows launchers CRLF in working checkouts.
+* text=auto eol=lf
+
+# Batch files must keep CRLF endings or cmd.exe mis-parses them, whatever the
+# checkout platform does with everything else.
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# Preserve the official SDK Git blob bytes for the integrity check, even on Windows.
+vendor/siwc-local/** -text
+vendor/siwc-dependency-inventory.json -text
+build/siwc/tsconfig.base.json -text

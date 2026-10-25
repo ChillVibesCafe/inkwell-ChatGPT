@@ -1,0 +1,12 @@
+{
+  "extends": "./siwc/tsconfig.base.json",
+  "compilerOptions": {
+    "types": ["node"],
+    "rootDir": "../vendor/siwc-local/src",
+    "outDir": "../vendor/siwc-local/dist",
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true
+  },
+  "include": ["../vendor/siwc-local/src/**/*.ts"]
+}
