@@ -20,3 +20,23 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+-------------------------------------------------------------------------------
+Additional third-party license notice (not part of the MIT License)
+-------------------------------------------------------------------------------
+
+The MIT License above applies to the original Inkwell application and the
+independently authored modifications distributed under MIT. It does not
+relicense third-party components that are distributed under separate terms.
+
+This edition includes OpenAI Sign in with ChatGPT DevKit components, licensed
+separately under the Sign-in with ChatGPT DevKit Noncommercial License,
+Version 1.0. Those components are NOT covered by the MIT License above.
+Their separate license includes noncommercial-use restrictions; permission
+to use or redistribute those components for commercial purposes must be
+obtained under the applicable OpenAI terms.
+
+See LICENSES.md for the scope of each license and THIRD_PARTY_NOTICES.md for
+third-party attribution and notices. Consult the bundled DevKit license text
+for its full terms. The MIT permission to sell copies applies only to material
+actually licensed under MIT; it does not override the separate DevKit license.
